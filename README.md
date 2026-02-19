@@ -36,8 +36,11 @@ It demonstrates how modern web technologies can be combined to build scalable co
 
 ## Project Structure
 
+```
 REAL-TIME-Chat-App/
 │
-├── API/ # ASP.NET Core Web API + SignalR backend
-├── client/ # Angular frontend
-└── Chat.sln # Solution file
+├── API/        # ASP.NET Core Web API + SignalR backend
+├── client/     # Angular frontend
+└── Chat.sln    # Solution file
+```
+
