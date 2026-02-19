@@ -1,25 +1,44 @@
-📡 REAL-TIME Chat App
+💬 Real-Time Chat & Video Call Application
+<p align="center"> <b>Full Stack Real-Time Communication Platform</b><br> Built with Angular, ASP.NET Core, SignalR & WebRTC </p>
+🚀 Overview
 
-A full-stack real-time chat application built with Angular, ASP.NET Core Web API, SignalR, and WebRTC.
+This project is a full-stack real-time communication application that enables:
 
-This project demonstrates how to build a modern communication platform with real-time messaging, user presence tracking, and peer-to-peer video calling — similar to applications like Slack, Zoom, or WhatsApp.
+💬 Private real-time messaging
 
-🚀 Features
+🟢 Online user presence tracking
 
-💬 Real-time private messaging
+📹 High-quality peer-to-peer video calling
 
-🟢 Online / Offline user presence
+⚡ Instant updates without page refresh
 
-🔔 Instant message delivery using SignalR
+It demonstrates how modern web technologies can be combined to build scalable communication platforms similar to Slack, Zoom, or WhatsApp.
 
-📹 Peer-to-peer video calling using WebRTC
+🧠 Core Features
+💬 Real-Time Messaging
 
-🔄 Live connection handling (connect / disconnect events)
+Instant private messaging between users
 
-⚡ Full-stack implementation (Frontend + Backend)
+Powered by SignalR
 
-🧩 Tech Stack
-Frontend
+Automatic connection handling
+
+🟢 User Presence
+
+Tracks online / offline users
+
+Live updates when users connect or disconnect
+
+📹 Video Calling
+
+Peer-to-peer video communication
+
+Implemented using WebRTC
+
+Browser-based video streaming
+
+🛠 Tech Stack
+🔹 Frontend
 
 Angular
 
@@ -27,36 +46,51 @@ TypeScript
 
 RxJS
 
-Backend
+🔹 Backend
 
 ASP.NET Core Web API
 
 SignalR
 
-Real-Time Communication
+🔹 Real-Time Communication
 
-SignalR (real-time messaging)
+SignalR (WebSockets abstraction)
 
-WebRTC (peer-to-peer video calls)
-
-🧠 What This Project Demonstrates
-
-How to implement real-time communication using SignalR
-
-Managing user connections and presence tracking
-
-Creating private messaging channels
-
-Integrating WebRTC for browser-based video calls
-
-Building a scalable full-stack application with .NET Core and Angular
+WebRTC (P2P video streaming)
 
 📁 Project Structure
 REAL-TIME-Chat-App/
-├── API/        # ASP.NET Core Web API + SignalR backend
-├── client/     # Angular frontend application
-└── Chat.sln    # Solution file
+│
+├── API/        → ASP.NET Core Web API + SignalR backend
+├── client/     → Angular frontend
+└── Chat.sln    → Solution file
 
-🎯 Goal of the Project
+🎯 What This Project Demonstrates
 
-The goal of this application is to showcase how modern web technologies can be combined to create a fully functional real-time communication platform with both messaging and video capabilities.
+Full-stack development with Angular & .NET Core
+
+Real-time communication architecture
+
+Managing live user connections
+
+Integrating WebRTC into a web application
+
+Building scalable messaging systems
+
+📌 Why This Project Matters
+
+This application showcases advanced concepts such as:
+
+Real-time event broadcasting
+
+Peer-to-peer networking
+
+State management in live applications
+
+Backend & frontend integration
+
+It reflects the architecture used in modern communication platforms.
+
+👨‍💻 Author
+
+Built as a full-stack learning project using modern web technologies.
