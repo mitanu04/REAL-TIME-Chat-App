@@ -60,7 +60,7 @@ builder.Services.AddAuthentication(opt =>
 
             var path = context.HttpContext.Request.Path;
             if (!string.IsNullOrEmpty(accessToken) &&
-            (path.StartsWithSegments("/chatHub")))
+            path.StartsWithSegments("/chatHub"))
             {
                 context.Token = accessToken;
             }
@@ -69,6 +69,8 @@ builder.Services.AddAuthentication(opt =>
     };
 
 });
+
+
 
 
 

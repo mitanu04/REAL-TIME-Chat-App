@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar'
 import { HttpErrorResponse } from '@angular/common/http';
 import { ApiResponse } from '../models/api-response';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 
 
@@ -22,7 +22,8 @@ import { Router } from '@angular/router';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule],
+    MatIconModule,
+  RouterLink],
   templateUrl: './register.html',
   styleUrls: ['./register.css'],
 })

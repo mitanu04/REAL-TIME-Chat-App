@@ -53,6 +53,12 @@ public class ChatHub(UserManager<AppUser> userManager, AppDbContext dbContext) :
         if (!string.IsNullOrEmpty(recevierId))
 
             await LoadMessages(recevierId);
+
+        await Clients.All.SendAsync("OnlineUsers", await GetAllUsers());
+
+        await base.OnConnectedAsync();
+
+
     }
 
     public async Task LoadMessages(string receiverId, int pageNumber = 1)
