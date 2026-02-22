@@ -59,10 +59,13 @@ builder.Services.AddAuthentication(opt =>
             var accessToken = context.Request.Query["access_token"];
 
             var path = context.HttpContext.Request.Path;
-            if (!string.IsNullOrEmpty(accessToken) &&
-            path.StartsWithSegments("/chatHub"))
+            if (!string.IsNullOrEmpty(accessToken)
+            &&
+            path.StartsWithSegments("/chatHub")
+            )
             {
                 context.Token = accessToken;
+                Console.WriteLine($"✅ Token primit pentru SignalR: {accessToken.ToString().Substring(0, 20)}...");
             }
             return Task.CompletedTask;
         }
@@ -89,14 +92,18 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:4200",
-"http://localhost:4200"));
+app.UseCors(x => x
+.AllowAnyHeader()
+.AllowAnyMethod()
+.AllowCredentials()
+.WithOrigins("http://localhost:4200"));
 
 
 
 //app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.UseStaticFiles();
 app.MapHub<ChatHub>("/chatHub");
 app.MapAccountEndpoints();
@@ -104,5 +111,4 @@ app.MapAccountEndpoints();
 
 
 app.Run();
-
 

@@ -12,6 +12,7 @@ import {MatSnackBar} from '@angular/material/snack-bar'
 import { HttpErrorResponse } from '@angular/common/http';
 import { ApiResponse } from '../models/api-response';
 import { Router, RouterLink } from '@angular/router';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @Component({
@@ -21,7 +22,7 @@ import { Router, RouterLink } from '@angular/router';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule, RouterLink],
+    MatIconModule, RouterLink, MatProgressSpinnerModule],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
@@ -34,30 +35,29 @@ export class Login {
   private router = inject(Router);
 
 
+isLoading = signal(false);
 
-hide=signal(false);
-
-  login(){
-    this.authService.login(this.email,this.password)
-      .subscribe({
-        next:()=>{
-          this.authService.me().subscribe();
-          this.snackBar.open('Logged in succesfully','Close');
-        },
-        error: (err:HttpErrorResponse)=> {
-          let error = err.error as ApiResponse<string>;
-
-          this.snackBar.open(err.error,"Close",{duration: 3000});
-        },
-        complete: ()=>{
-      this.router.navigate(['/'])
-    }
-      })
-  }
+login() {
+  this.isLoading.set(true);
+  this.authService.login(this.email, this.password)
+    .subscribe({
+      next: () => {
+        this.authService.me().subscribe();
+        this.snackBar.open('Logged in successfully', 'Close', { duration: 500 });
+      },
+      error: (err: HttpErrorResponse) => {
+        this.isLoading.set(false);
+        this.snackBar.open(err.error, "Close", { duration: 3000 });
+      },
+      complete: () => {
+        this.router.navigate(['/']);
+      }
+    });
+}
 
 
   togglePassword(event: MouseEvent){
-    this.hide.set(!this.hide() );
+    this.isLoading.set(!this.isLoading());
     event.stopPropagation();
 
   }

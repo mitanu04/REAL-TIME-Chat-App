@@ -38,14 +38,14 @@
             <mat-form-field class="w-full" appearance="fill">
                 <mat-label>Password</mat-label>
                 <input matInput 
-                [type]="hide()?'text':'password'" 
+                [type]="isLoading()?'text':'password'" 
                 name="password" 
                 required
                 [(ngModel)]="password"
                 #passwordModel="ngModel"
                 placeholder="Password">
                 <mat-icon (click)="togglePassword($event)"  matSuffix>
-                    {{ hide() ? 'visibility' : 'visibility_off'}}
+                    {{ isLoading() ? 'visibility' : 'visibility_off'}}
                 </mat-icon>
 
                 @if(passwordModel.errors?.['required']){
@@ -55,10 +55,19 @@
                 }
             </mat-form-field>
 
-            <button type="submit" [disabled]="!userForm.valid"
-                class="w-full mb-5 bg-blue-900 text-white rounded-md p-2 disabled:opacity-30">
-                Login
-            </button>
+            <button 
+  type="submit" 
+  [disabled]="!userForm.valid || isLoading()"
+  class="w-full mb-5 bg-blue-900 text-white rounded-md p-2 disabled:opacity-30 
+         hover:bg-blue-700 active:bg-blue-950 transition-colors duration-200 
+         flex items-center justify-center gap-2">
+  @if(isLoading()){
+    <mat-spinner diameter="18" strokeWidth="3"></mat-spinner>
+    <span>Processing...</span>
+  }@else {
+    Login
+  }
+</button>
 
             <p class="font-bold text-xs text-center pb-10">
             Don't have an account? <a class="text-blue-500" [routerLink]="'/register'">Register</a>

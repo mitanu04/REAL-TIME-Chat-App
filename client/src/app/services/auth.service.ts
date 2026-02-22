@@ -5,19 +5,27 @@ import { ApiResponse } from '../models/api-response';
 import { Form } from '@angular/forms';
 import { User } from '../models/user';
 //import {AuthServiceService} from '../services/auth-service';
+import { environment } from '../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   
-  private baseUrl = 'http://localhost:5000/api/account';
+  //private baseUrl = 'http://localhost:5000/api/account';
+
+  private baseUrl = `${environment.hubUrl}/api/account`;
   private token= "token";
 
- private httpClient = inject(HttpClient);
+  private headers = {
+  'ngrok-skip-browser-warning': 'true'
+};
+
+private httpClient = inject(HttpClient);
 
   register(data:FormData): Observable<ApiResponse<string>> {
-    return this.httpClient.post<ApiResponse<string>>(`${this.baseUrl}/register`, data
+    return this.httpClient.post<ApiResponse<string>>(`${this.baseUrl}/register`, data, {headers: this.headers}
     ).pipe(tap((response) => {
       localStorage.setItem(this.token, response.data);
     })
@@ -28,7 +36,7 @@ export class AuthService {
     return this.httpClient.post<ApiResponse<string>>(`${this.baseUrl}/login`,{
       email,
       password
-    })
+    }, {headers: this.headers})
     .pipe(
       tap((response)=>{
       if(response.isSuccess) {
@@ -44,6 +52,8 @@ export class AuthService {
       return this.httpClient.get<ApiResponse<User>>(`${this.baseUrl}/me`,{
         headers:{
           Authorization: `Bearer ${this.getAccessToken}`,
+          'ngrok-skip-browser-warning': 'true'
+
         },
       })
       .pipe(

@@ -1,3 +1,4 @@
+
 import { Component,inject, OnInit } from '@angular/core';
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from '@angular/material/icon';
@@ -7,12 +8,15 @@ import { Router } from '@angular/router';
 import { TitleCasePipe } from '@angular/common';
 import { ChatService } from '../../services/chat.service';
 import { User } from '../../models/user';
+import { TypingIndicator } from '../typing-indicator/typing-indicator';
+
 
 @Component({
   selector: 'app-chat-sidebar',
   imports: [MatButtonModule,
             MatIconModule,
             MatMenuModule,
+            TypingIndicator,
             TitleCasePipe
           ],
 
@@ -36,6 +40,9 @@ export class ChatSidebar implements OnInit {
 
   openChatWindow(user: User){
     this.chatService.currentOpenedChat.set(user);
+    this.chatService.chatMessages.set([]); // golește mesajele vechi
+    this.chatService.isLoading.set(true);  // arată spinner
+    this.chatService.loadMessages(1);      // încarcă mesajele
   }
 
 }

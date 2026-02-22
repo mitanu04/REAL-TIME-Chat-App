@@ -89,17 +89,33 @@
 
 
             <button (click)="pic.click()"
-            type="button" 
-                class="w-full flex items-center gap-2 justify-center mb-5 bg-green-900 text-white rounded-mb p-2">
-                    <mat-icon>add_a_photo</mat-icon>
-                    <span>Upload Image</span>
-                </button>
+  type="button"
+  [disabled]="isLoading()"
+  class="w-full flex items-center gap-2 justify-center mb-3 border-2 border-dashed border-green-700 
+         text-green-800 rounded-md p-2 hover:bg-green-50 active:bg-green-100 
+         transition-colors duration-200 disabled:opacity-30">
+  @if(profileImageFile){
+    <mat-icon class="text-green-700">check_circle</mat-icon>
+    <span class="text-sm truncate max-w-[180px]">{{profileImageFile.name}}</span>
+  }@else {
+    <mat-icon>add_a_photo</mat-icon>
+    <span>Upload Image</span>
+  }
+</button>
 
-            <button type="submit" 
-                [disabled]="!userForm.valid"
-                class="w-full mb-5 bg-blue-900 text-white rounded-md p-2 disabled:opacity-30">
-                Register
-            </button>
+            <button 
+                type="submit" 
+                [disabled]="!userForm.valid || isLoading()"
+                class="w-full mb-5 bg-blue-900 text-white rounded-md p-2 disabled:opacity-30 
+                    hover:bg-blue-700 active:bg-blue-950 transition-colors duration-200 
+                    flex items-center justify-center gap-2">
+                @if(isLoading()){
+                    <mat-spinner diameter="18" strokeWidth="3"></mat-spinner>
+                    <span>Processing...</span>
+                }@else {
+                    Register
+                }
+                </button>
 
             <p class="font-bold text-xs text-center pb-10">
                 Already have an account? <a class="text-blue-500" [routerLink]="'/login'">Login</a>
